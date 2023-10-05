@@ -1,95 +1,28 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'; 
+import React from 'react';
+import DiveSelectionComponent from '../Components/DiveSelectionComponent';
+import JudgeComponent from '../Components/JudgeComponent';
+import TestComponent from '../Components/TestComponent';
+import StartingQuestionsComponent from '../Components/StartingQuestionsComponent';
+import ResultsTableComponent from '../Components/ResultsTableComponent';
+import { useSelector } from 'react-redux';
+import { selectDiverNameArray } from '../lib/redux/slices/diverNameArray/diverNameArraySlice';
+
+
 
 export default function Home() {
+  const diverNameArray = useSelector(selectDiverNameArray);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+      <div className="main">
+          <TestComponent />
+          <h1>Diving App</h1>
+            {diverNameArray.length === 0 ? <StartingQuestionsComponent /> : ''}
+            {diverNameArray.length === 0 ? '' : <DiveSelectionComponent />}
+            {diverNameArray.length === 0 ? '' : <JudgeComponent />}
+            {/* If current round = length of diver array add reset button to delete and start new, but include a warning are you sure before executing */}
+          <hr></hr>
+          {diverNameArray.length === 0 ? '' :  <ResultsTableComponent />}
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
   )
 }
