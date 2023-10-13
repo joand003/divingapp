@@ -1,26 +1,17 @@
 'use client'; 
-import React, {useEffect} from 'react';
-import DiveSelectionComponent from '../Components/DiveSelectionComponent';
-import JudgeComponent from '../Components/JudgeComponent';
-import TestComponent from '../Components/TestComponent';
-import StartingQuestionsComponent from '../Components/StartingQuestionsComponent';
-import ResultsTableComponent from '../Components/ResultsTableComponent';
-import { useSelector } from 'react-redux';
-import { selectDiverNameArray } from '../lib/redux/slices/diverNameArray/diverNameArraySlice';
-import { useRouter } from 'next/navigation';
-import { selectUserObject, setUserObject } from '../lib/redux/slices/userObject/userObjectSlice';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import React from 'react';
 import Link from 'next/link';
-import { selectDiveMode, setDiveMode } from '@/lib/redux/slices/diveMode/diveModeSlice';
-
-
+import axios from 'axios';
+import 'dotenv/config'
 
 export default function Home() {
-
-
   return (
     <div className='px-48 text-center '>
+      <button onClick={async()=> {
+        const test = await axios.get('/api/hello')
+        console.log(`process.env.SENDGRID_API_URL: ${process.env.SENDGRID_API_URL}`)
+        console.log(test.data)
+      }}>test</button>
       <h1 className="flex flex-col justify-center pt-12">
           Diving App
       </h1>

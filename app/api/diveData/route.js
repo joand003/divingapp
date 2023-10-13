@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import clientPromise from "../../../lib/mongo/index";
 import { cookies } from "next/headers"; 
 import  jwt  from 'jsonwebtoken';
+import 'dotenv/config'
+
 
 let client;
 let db;
