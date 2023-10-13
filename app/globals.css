@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: hsla(185, 100%, 50%, 0.6);
 }
 
 code {
@@ -12,10 +21,10 @@ code {
     monospace;
 }
 
-* {
-  box-sizing: border-box;
+.main {
+  margin: 0 10% 0 10%;
 }
-
+/* 
 h1 {
   text-align: center;
 }
@@ -23,6 +32,13 @@ h1 {
 .container {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerColumn {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -36,10 +52,6 @@ h1 {
 
 .padLeft {
   padding-left: 2em;
-}
-
-.main {
-  margin: 0 10% 0 10%;
 }
 
 td {
@@ -57,12 +69,64 @@ label {
 
 input {
   width: 30px;
-}
+} */
 
-button {
+/* button {
   margin: 5px;
+  background-color: darkgray;
+} */
+
+
+
+
+
+@layer base {
+  button {
+    @apply bg-gray-500 text-white p-2 rounded hover:bg-gray-700 mt-2;
+  }
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-2xl font-bold;
+  }
+  h4 {
+    @apply text-xl font-bold;
+  }
+  h5 {
+    @apply text-lg font-bold;
+  }
+  p {
+    @apply text-base;
+  }
+  ul {
+    @apply list-disc pl-5;
+  }
+  ol {
+    @apply list-decimal pl-5;
+  }
+  nav {
+    @apply bg-gray-800 text-white h-12 flex justify-end items-center;
+  }
+  input {
+    @apply border border-gray-400 rounded p-2 text-left w-60;
+  }
+  td {
+    @apply text-center px-4;
+  }
 }
 
-.normalText {
-  font-weight: normal;
+@layer components {
+  .radio {
+    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-400;
+  }
+  .navLink {
+    @apply px-4 hover:bg-gray-300 h-12 items-center flex;
+  }
+  .logout {
+    @apply hover:bg-gray-300 h-12 items-center flex bg-gray-800 text-white p-4 m-0 w-auto;
+  }
 }

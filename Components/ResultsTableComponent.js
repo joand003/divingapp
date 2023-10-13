@@ -13,13 +13,13 @@ const ResultsTableComponent = () => {
 
     const totalScoresArray = diverScoresArray.map((diver, index) => {
         return diver.reduce((score, current)=>{
-            return Number(score) + Number(current)
+            return (Number(score) + Number(current)).toFixed(2)
         }, 0)
     })
 
 
   return (
-    <div>
+    <div className='flex justify-center'>
       <table>
         <thead>
           <tr>
