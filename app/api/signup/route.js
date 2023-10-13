@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongo';
 import bcrypt from 'bcrypt';
 import  jwt  from 'jsonwebtoken';
-import 'dotenv/config'
 
 
 let client;

@@ -1,17 +1,10 @@
 'use client'; 
 import React from 'react';
 import Link from 'next/link';
-import axios from 'axios';
-import 'dotenv/config'
 
 export default function Home() {
   return (
     <div className='px-48 text-center '>
-      <button onClick={async()=> {
-        const test = await axios.get('/api/hello')
-        console.log(`process.env.SENDGRID_API_URL: ${process.env.SENDGRID_API_URL}`)
-        console.log(test.data)
-      }}>test</button>
       <h1 className="flex flex-col justify-center pt-12">
           Diving App
       </h1>

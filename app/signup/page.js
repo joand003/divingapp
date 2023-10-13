@@ -138,7 +138,7 @@ export default function Signup() {
         </form>
 
         <p className="pt-3">
-        Already registered? <Link className="underline text-purple-500" href="/login">Login</Link>
+        Already registered? <Link className="underline text-purple-500" href="/login">Sign up</Link>
       </p>
       </div>
     </main>

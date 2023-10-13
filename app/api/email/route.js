@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-import 'dotenv/config'
 
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
