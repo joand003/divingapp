@@ -155,7 +155,7 @@ const StartingQuestionsComponent = () => {
         
         <div className='flex justify-center items-center text-center py-2'>
             <h3 style={{paddingRight: '0.5em'}}>Approximately how many divers are diving today?</h3>
-            <input className='w-10 text-center' placeholder='0' name='diverInput' type='text' onChange={handleNumberOfDivers}></input>
+            <input className='lg:w-10 w-3 text-center' placeholder='0' name='diverInput' type='text' onChange={handleNumberOfDivers}></input>
             <p>{diverMessage}</p>
         </div>
         <div>
