@@ -31,7 +31,7 @@ const ScoreButtonComponent = (judgeNumber) => {
     }
 
   return (
-    <div className='flex space-x-2 justify-center'>
+    <div className='flex space-x-2 justify-center flex-wrap'>
         <button onClick={handleJudgeScoreChange} value={0}>
             0
         </button>

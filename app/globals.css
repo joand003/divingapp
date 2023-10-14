@@ -85,13 +85,13 @@ input {
     @apply bg-gray-500 text-white p-2 rounded hover:bg-gray-700 mt-2;
   }
   h1 {
-    @apply text-4xl font-bold;
+    @apply lg:text-4xl sm:text-2xl font-bold;
   }
   h2 {
-    @apply text-3xl font-bold;
+    @apply lg:text-3xl sm:text-2xl font-bold;
   }
   h3 {
-    @apply text-2xl font-bold;
+    @apply lg:text-2xl sm:text-xl font-bold;
   }
   h4 {
     @apply text-xl font-bold;
@@ -109,13 +109,13 @@ input {
     @apply list-decimal pl-5;
   }
   nav {
-    @apply bg-gray-800 text-white h-12 flex justify-end items-center;
+    @apply bg-gray-800 text-white lg:h-12 sm:h-9 flex justify-end items-center;
   }
   input {
-    @apply border border-gray-400 rounded p-2 text-left w-60;
+    @apply border border-gray-400 rounded p-2 text-left lg:w-60 sm:w-20;
   }
   td {
-    @apply text-center px-4;
+    @apply text-center lg:px-4 sm:px-2;
   }
 }
 
@@ -124,9 +124,9 @@ input {
     @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-400;
   }
   .navLink {
-    @apply px-4 hover:bg-gray-300 h-12 items-center flex;
+    @apply px-4 hover:bg-gray-300 lg:h-12 sm:h-9 items-center flex;
   }
   .logout {
-    @apply hover:bg-gray-300 h-12 items-center flex bg-gray-800 text-white p-4 m-0 w-auto;
+    @apply hover:bg-gray-300 lg:h-12 sm:h-9 items-center flex bg-gray-800 text-white p-4 m-0 w-auto;
   }
 }

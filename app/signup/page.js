@@ -132,13 +132,13 @@ export default function Signup() {
           </div>
 
           <button className="bg-gray-500" type="submit" onClick={handleSubmit}>
-            Login
+            Sign up
           </button>
 
         </form>
 
         <p className="pt-3">
-        Already registered? <Link className="underline text-purple-500" href="/login">Sign up</Link>
+        Already registered? <Link className="underline text-purple-500" href="/login">Login</Link>
       </p>
       </div>
     </main>

@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center pt-6">
       <h1 className="text-center">Diving App</h1>
-      <StartingQuestionsComponent />
+      {diveMode === "meetTracker" ? '' : <StartingQuestionsComponent />}
       {diveMode === "meetTracker" ? <DiveSelectionComponent /> : ""}
       {diveMode === "meetTracker" ? <JudgeComponent /> : ""}
       {diveMode === "meetTracker" ? <hr></hr> : ""}

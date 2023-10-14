@@ -35,7 +35,7 @@ export default function DiveCalculator () {
   return (
     <div className='pb-10'>
         <h1 className='text-4xl text-center py-6'>Dive Calculator</h1>
-        <p className='px-48 italic pb-6'>To get started just click the number of judges. Note: This calculator will not save your dive information, to save all dives for a meet please go to the meet tracker.</p>
+        <p className='lg:px-48 italic pb-6'>To get started just click the number of judges. Note: This calculator will not save your dive information, to save all dives for a meet please go to the meet tracker.</p>
         <div className='flex flex-row items-center justify-center text-center py-2'>
             <h3>Please select the number of judges scoring.</h3>
             <div className='flex flex-row justify-start space-x-4 ml-4'> 
