@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className='px-48 text-center '>
+    <div className='lg:px-48 text-center '>
       <h1 className="flex flex-col justify-center pt-12">
           Diving App
       </h1>
