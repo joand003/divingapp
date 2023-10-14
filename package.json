@@ -1,11 +1,16 @@
 {
   "name": "divingscoreapp",
   "version": "0.1.0",
+  "engines": {
+    "node": "18.17.1",
+    "npm": "9.6.7"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
     "lint": "next lint"
   },
   "dependencies": {
