@@ -64,22 +64,3 @@ const ScoreButtonComponent = (judgeNumber) => {
 }
 
 export default ScoreButtonComponent
-
-
-// const handleJudgeScoreChange = (e) => {
-//     const judgeName = 'judge' + judgeNumber.judgeNumber
-//     const updatedObject = { ...judgeScores[currentDiveRound - 1]}
-//     updatedObject[judgeName] = parseInt(e.target.value)
-//     const newJudgeScores = judgeScores.map(obj => obj === judgeScores[currentDiveRound - 1] ? updatedObject : obj)
-
-//     dispatch(setJudgeScoresArray(newJudgeScores))
-// }
-
-// const handleAddHalfJudgeScoreChange = (e) => {
-//     const judgeName = 'judge' + judgeNumber.judgeNumber
-//     const newScore = judgeScores[currentDiveRound - 1][judgeName] + parseFloat(e.target.value)
-//     const updatedObject = { ...judgeScores[currentDiveRound - 1]}
-//     updatedObject[judgeName] = newScore
-//     const newJudgeScores = judgeScores.map(obj => obj === judgeScores[currentDiveRound - 1] ? updatedObject : obj)
-//     dispatch(setJudgeScoresArray(newJudgeScores))
-// }

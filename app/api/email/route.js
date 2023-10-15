@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export async function POST(req) {
-  try {
+
     // destructure message into parts
     const { message } = await req.json();
 
@@ -33,16 +33,13 @@ export async function POST(req) {
     const token = cookieStore.get("jwt");
 
     let decodedJwt;
-
     try {
       decodedJwt = jwt.verify(token.value, process.env.JWT_SECRET);
     } catch (error) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 400 });
+      return NextResponse.json({ msg: "Invalid token" }, { status: 400 });
     }
-
     const email = decodedJwt.email;
     const username = decodedJwt.username;
-
 
     const content = {
       to: email,
@@ -52,12 +49,16 @@ export async function POST(req) {
       html: `${username} your dive results for the ${meet}.<br>Diver Results:<br>${diverTable}<br><br>`,
     };
 
-    await sgMail.send(content);
+    try {
+      await sgMail.send(content);
+    } catch (error) {
+      return NextResponse.json(
+        { msg: "Message not sent" },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
-      { data: "diverTable", message: "Message sent" },
+      { msg: "Message sent" },
       { status: 200 }
     );
-  } catch (error) {
-    return NextResponse({ message: "Message not sent" }, { status: 400 });
-  }
 }

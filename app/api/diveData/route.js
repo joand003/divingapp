@@ -27,7 +27,6 @@ async function init() {
 
 export async function POST(req, res) {
     let username;
-    let email;
     let decodedJwt;
     const { data } = await req.json();
 
@@ -56,18 +55,14 @@ export async function POST(req, res) {
         const cookieStore = cookies();
         const token = cookieStore.get('jwt');
 
-        console.log(`token: ${token.value}`) 
-
         // check if jwt is valid
         try {
             decodedJwt = jwt.verify(token.value, process.env.JWT_SECRET);
         } catch (error) {
-            console.log(`error: ${error}`)
             return NextResponse.json({msg: 'jwt not valid'}, {status: 400});
         }
 
         username = decodedJwt.username;
-        email = decodedJwt.email;
 
         try {
             const data = await user.find({ username }).toArray();
@@ -76,13 +71,14 @@ export async function POST(req, res) {
                 return NextResponse.json({msg: 'user not found'}, {status: 400});
             }
 
-            const updatedData = await user.updateOne({username}, {$push: {'girlsDiving.sy2324Meets': newMeetObject}})
+            await user.updateOne({username}, {$push: {'girlsDiving.sy2324Meets': newMeetObject}})
 
+            return NextResponse.json({msg: 'Meet info saved'}, {status: 201});
         } catch (error) {
-            return NextResponse.json({msg: 'error in finding user'}, {status: 400});
+            return NextResponse.json({msg: 'error in finding user'}, {status: 200});
         }
 
-        return NextResponse.json({msg: 'Meet info saved'}, {status: 201});
+        
       } catch (e) {
         return NextResponse.json("error in entering data");
       }

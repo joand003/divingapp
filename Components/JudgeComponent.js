@@ -8,9 +8,8 @@ import {
 } from "../lib/redux/slices/judgeScoresArray/judgeScoresArraySlice";
 import {
   selectCurrentDiveRound,
-  setCurrentDiveRound,
+  setCurrentRound,
   increaseCurrentRound,
-  decreaseCurrentRound,
 } from "../lib/redux/slices/currentDiveRound/currentDiveRoundSlice";
 import {
   setDiverScoresArray,
@@ -19,7 +18,6 @@ import {
 import {
   selectCurrentDiverNumber,
   increaseCurrentDiverNumber,
-  decreaseCurrentDiverNumber,
   setCurrentDiverNumber,
 } from "../lib/redux/slices/currentDiverNumber/currentDiverNumberSlice";
 import { selectNumberOfJudges } from "../lib/redux/slices/numberOfJudges/numberOfJudgesSlice";
@@ -45,11 +43,16 @@ import {
   addJudgesToNewDiver,
 } from "../functions/addNewDiver";
 import { selectMeetInfoObject } from "../lib/redux/slices/meetInfoObject/meetInfoObjectSlice";
+import { setDiveMode } from "@/lib/redux/slices/diveMode/diveModeSlice";
 import axios from "axios";
+import {useRouter} from "next/navigation";
+
 
 const JudgeComponent = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isSubmited, setIsSubmited] = useState(false);
+  const [emailData, setEmailData] = useState(false);
   const numberOfJudges = useSelector(selectNumberOfJudges);
   const diverDifficultyArray = useSelector(selectDiverDifficultyArray);
   const judgeScoresArray = useSelector(selectJudgeScoresArray);
@@ -146,26 +149,25 @@ const JudgeComponent = () => {
   ]);
 
   const handleSubmit = async () => {
-    // try {
-    //   const response = await axios.post("/api/email", {
-    //     message: {
-    //       diverNameArray,
-    //       diverScoreArray,
-    //       diverDifficultyArray,
-    //       diverCodesArray,
-    //       judgeScoresArray,
-    //       meetInfoObject
-    //     },
-    //     email: "joshua.andersland@gmail.com",
-    //   });
-    //   console.log(response);
-    // } catch (error) {
-    //   console.log(`error sending email: ${error}`);
-    // }
-    console.log(meetInfoObject)
+    if (emailData) {
+      try {
+        await axios.post("/api/email", {
+          message: {
+            diverNameArray,
+            diverScoreArray,
+            diverDifficultyArray,
+            diverCodesArray,
+            judgeScoresArray,
+            meetInfoObject,
+          }
+        });
+      } catch (error) {
+        console.log(`error sending email: ${error}`);
+      }
+    }
 
     try {
-        const response = await axios.post("/api/diveData", {
+        await axios.post("/api/diveData", {
             data: {
                 diverNameArray,
                 diverScoreArray,
@@ -174,24 +176,19 @@ const JudgeComponent = () => {
                 meetInfoObject
             }
         })
-        console.log(response)
         setIsSubmited(true)
     } catch (error) {
         console.log(`error sending data to database: ${error}`)
     }
-    const handleRestart = () => {
-        console.log('restart')
-        setIsSubmited(false)
-        dispatch(setCurrentDiverNumber(1))
-        dispatch(setCurrentDiveRound(1))
-        dispatch(setJudgeScoresArray([]))
-        dispatch(setDiverScoresArray([]))
-        dispatch(setDiverDifficultyArray([]))
-        dispatch(setDiverCodesArray([]))
-        dispatch(setDiverDescriptionsArray([]))
-        dispatch(setDiverNameArray([]))
-    }
   };
+
+  const handleRestart = () => {
+    setIsSubmited(false)
+    dispatch(setCurrentDiverNumber(1))
+    dispatch(setCurrentRound(1))
+    dispatch(setDiveMode(""))
+    router.push('/')
+}
 
   const handleNextDiver = () => {
     if (diverScoreArray.length == currentDiverNumber) {
@@ -230,34 +227,9 @@ const JudgeComponent = () => {
     dispatch(setDiverNameArray(newNameArray));
   };
 
-  // const handleRemoveDivers = () => {
-  //     let newJudgeScoresArray = [...judgeScoresArray]
-  //     let newDiverScoreArray = [...diverScoreArray]
-  //     let newDiverDifficultyArray = [...diverDifficultyArray]
-  //     let newDiverCodesArray = [...diverCodesArray]
-  //     let newDiverDescriptionsArray = [...diverDescriptionsArray]
-  //     let newDiverNameArray = [...diverNameArray]
-
-  //     console.log(`diver score array length: ${diverScoreArray.length}`)
-  //     if (diverScoreArray.length == 1) {
-  //         return
-  //     }
-  //     let currentDiver = currentDiverNumber - 1
-  //     dispatch(setCurrentDiverNumber(currentDiver))
-  //     // Remove them immutably
-  //     newJudgeScoresArray.pop()
-  //     newDiverScoreArray.pop()
-  //     newDiverDifficultyArray.pop()
-  //     newDiverCodesArray.pop()
-  //     newDiverDescriptionsArray.pop()
-  //     newDiverNameArray.pop()
-  //     dispatch(setJudgeScoresArray(newJudgeScoresArray))
-  //     dispatch(setDiverCodesArray(newDiverScoreArray))
-  //     dispatch(setDiverDifficultyArray(newDiverDifficultyArray))
-  //     dispatch(setDiverCodesArray(newDiverCodesArray))
-  //     dispatch(setDiverDescriptionsArray(newDiverDescriptionsArray))
-  //     dispatch(setDiverNameArray(newDiverNameArray))
-  // }
+  const handleEmail = () => {
+    setEmailData(!emailData);
+  }
 
   return (
     <div className="mb-4 text-center">
@@ -282,8 +254,8 @@ const JudgeComponent = () => {
       </h4>
       <div className="flex justify-center space-x-4">
       {diverScoreArray.length == currentDiverNumber &&
-      currentDiveRound == totalRounds ? (
-        <button onClick={handleSubmit}>Submit</button>
+      currentDiveRound == totalRounds && !isSubmited ? (
+        <div><button onClick={handleSubmit}>Submit</button> <div className="inline pl-4"><input onChange={handleEmail} className="w-4" type="checkbox" name="emailResults" /><label className="pl-2" htmlFor="emailResults">email results?</label></div></div>
       ) : (
         ""
       )}
@@ -305,6 +277,7 @@ const JudgeComponent = () => {
       ) : (
         ""
       )}
+      {isSubmited ? (<button onClick={handleRestart}>Restart</button>) : ("")}
       </div>
     </div>
   );

@@ -70,36 +70,27 @@ const TestComponent = () => {
 
 {/* Testing buttons */}
         <button onClick={async()=> {
-            const user = await fetch('/api/getUsername')
-
-            const data = await user.json()
-          
-            console.log(`user.json: ${JSON.stringify(data, null, 2)}`)
-          
-
-
-            // const user = await axios.get('/api/getUsername')
-            // console.log(user.data.username)
-        }}>get username</button>
-
-      <button onClick={()=>{
-            axios.post('/api/logout', {})
-        }
-        }>logout</button>
-      <button
-        onClick={async () => {
-          const response = await axios.post("/api/login", {
-            username: "lainey",
-            email: "lainey@example.com",
-            password: "password!",
+         try {
+          const response = await axios.post("/api/sgTest", {
+            message: {
+              diverNameArray: ['diver1', 'diver2', 'diver3'],
+              diverScoreArray: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+              diverDifficultyArray: [1, 2, 3],
+              diverCodesArray: [1, 2, 3],
+              judgeScoresArray: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+              meetInfoObject: {
+                date: 'date',
+                location: 'location',
+                meet: 'meet'
+              }
+            }
           });
+          console.log(response);
+        } catch (error) {
+          console.log(`error sending email: ${error}`);
+        }   
+        }}>test email</button>
 
-          console.log(response.data);
-
-        }}
-      >
-        login to db
-      </button>
     </div>
   );
 };
