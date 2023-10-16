@@ -20,8 +20,6 @@ export default function DiveCalculator () {
 
 
     const handleJudgeNumberChange = (e) => {
-        console.log(Number(e.target.value))
-        console.log(typeof(Number(e.target.value)))
         dispatch(setJudgeScoresArray(judgeArrayBuilder(2, 6, Number(e.target.value))))
         dispatch(setNumberOfJudges(Number(e.target.value)))
         dispatch(setDiverScoresArray(diverArrayBuilder(0, 2, 6)))

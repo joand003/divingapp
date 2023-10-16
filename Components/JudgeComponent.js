@@ -53,6 +53,8 @@ const JudgeComponent = () => {
   const router = useRouter();
   const [isSubmited, setIsSubmited] = useState(false);
   const [emailData, setEmailData] = useState(false);
+  const [useTotal, setUseTotal] = useState(false);
+  const [newTotalScore, setNewTotalScore] = useState('');
   const numberOfJudges = useSelector(selectNumberOfJudges);
   const diverDifficultyArray = useSelector(selectDiverDifficultyArray);
   const judgeScoresArray = useSelector(selectJudgeScoresArray);
@@ -141,11 +143,24 @@ const JudgeComponent = () => {
       );
       dispatch(setDiverScoresArray(newDiverScoreArray));
     }
+    if (useTotal) {
+      let newScore = Number(newTotalScore) * diverDifficultyArray[currentDiverNumber - 1][currentDiveRound - 1];
+    newScore = Number.parseFloat(newScore).toFixed(2);
+    const updatedScoresArray = [...diverScoreArray[currentDiverNumber - 1]];
+    updatedScoresArray[currentDiveRound - 1] = newScore;
+    const newDiverScoreArray = diverScoreArray.map((array) =>
+      array === diverScoreArray[currentDiverNumber - 1]
+        ? updatedScoresArray
+        : array
+    );
+    dispatch(setDiverScoresArray(newDiverScoreArray));
+    }
   }, [
     judgeScoresArray,
     diverDifficultyArray,
     currentDiverNumber,
     currentDiveRound,
+    newTotalScore,
   ]);
 
   const handleSubmit = async () => {
@@ -191,6 +206,7 @@ const JudgeComponent = () => {
 }
 
   const handleNextDiver = () => {
+    setNewTotalScore('')
     if (diverScoreArray.length == currentDiverNumber) {
       dispatch(increaseCurrentRound());
       dispatch(setCurrentDiverNumber(1));
@@ -231,8 +247,24 @@ const JudgeComponent = () => {
     setEmailData(!emailData);
   }
 
+  const handleUseTotalScore = () => {
+    setUseTotal(!useTotal);
+  }
+
+  const handleTotalScore = (e) => {
+    setNewTotalScore(e.target.value)
+  }
+
+
+
+
   return (
     <div className="mb-4 text-center">
+      <p>Would you prefer to just enter the total score? <input className="w-4" name="usetotalScore" type="checkbox" onChange={handleUseTotalScore}/></p>
+      {useTotal ? (<div>
+        <label htmlFor="totalScoreInput">Score: </label><input placeholder="score" className="w-20" name="totalScoreInput" onChange={handleTotalScore} value={newTotalScore}/>
+        </div>)
+         : ("")}
       {Object.entries(
         judgeScoresArray[currentDiverNumber - 1][currentDiveRound - 1]
       ).map(([key, value], index) => {
