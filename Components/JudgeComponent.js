@@ -144,7 +144,7 @@ const JudgeComponent = () => {
       dispatch(setDiverScoresArray(newDiverScoreArray));
     }
     if (useTotal) {
-      let newScore = Number(newTotalScore) * diverDifficultyArray[currentDiverNumber - 1][currentDiveRound - 1];
+      let newScore = Number(newTotalScore);
     newScore = Number.parseFloat(newScore).toFixed(2);
     const updatedScoresArray = [...diverScoreArray[currentDiverNumber - 1]];
     updatedScoresArray[currentDiveRound - 1] = newScore;
