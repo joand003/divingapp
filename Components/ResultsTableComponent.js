@@ -1,22 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectDiverNameArray } from '../lib/redux/slices/diverNameArray/diverNameArraySlice'
-import { selectDiverScoresArray } from '../lib/redux/slices/diverScoresArray/diverScoresArraySlice'
+import { selectTotalScoresArray } from '../lib/redux/slices/totalScoresArray/totalScoresArraySlice'
 
 
 const ResultsTableComponent = () => {
     const diverNameArray = useSelector(selectDiverNameArray);
-    const diverScoresArray = useSelector(selectDiverScoresArray);
-
-    // need to add totals and redo how the map is working for the table so that it had place as well, but will need to redo how it is mapped
-
-
-    const totalScoresArray = diverScoresArray.map((diver, index) => {
-        return diver.reduce((score, current)=>{
-            return (Number(score) + Number(current)).toFixed(2)
-        }, 0)
-    })
-
+    const totalScoresArray = useSelector(selectTotalScoresArray);
+    
+    const placeArray = totalScoresArray.map((score, index) => ({index, score})).sort((a, b) => b.score - a.score).map((data) => data.index + 1)
 
   return (
     <div className='flex justify-center'>
@@ -37,6 +29,7 @@ const ResultsTableComponent = () => {
                             <td>{index + 1}</td>
                             <td>{diver}</td>
                             <td>{totalScoresArray[index]}</td>
+                            <td>{placeArray[index]}</td>
                         </tr>
                     )
                 })

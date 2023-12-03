@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Diving App
 
-## Getting Started
+## Introduction
+This app was made to solve the problem of my wife needing a quick way to calculate scores from dives and track the divers during dive meets when there wasn't a screen or board to show results. This app is the solution to that as it allows her to quickly track scores and keep track of placement of each divers in an easy to use app. There are more features coming soon which will allow her and others to get statistics within a dive season. 
 
-First, run the development server:
+## Continuous Updates
+This app is continually being updated with features and UI issues that can make the users experience better. If you have any feedback feel free to email me (joshua.andersland@gmail.com) or send a pull request. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Planned Future updates
+Not in any order: 
+- Unit tests
+- Integration tests
+- Profile section to track and look at stats within the dive season
+- Change the dive meet section to upload a dive season calender to use
+- change the dive meet section to input an exhibition event or non scheduled event
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Links
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### GitHub Repository
+- **Diving App**: [GitHub - DivingApp](https://github.com/joand003/divingapp)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Live Applications
+- **Diving App**: [DivingApp](https://diveapp-cce6b60b0629.herokuapp.com/)
 
-## Learn More
+## Technologies Used
+- **Frontend**: Next.js, Bootstrap, Redux
+- **Backend**: MongoDB
+- **Authentication**: Custom JWT/Cookie, combined with bcrypt for password hashing and salting
+- **Email Integration**: SendGrid
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Running the Portfolio Locally
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/joand003/divingapp.git

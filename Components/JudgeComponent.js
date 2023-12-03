@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import ScoreButtonComponent from "./ScoreButtonComponent";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -44,6 +44,7 @@ import {
 } from "../functions/addNewDiver";
 import { selectMeetInfoObject } from "../lib/redux/slices/meetInfoObject/meetInfoObjectSlice";
 import { setDiveMode } from "@/lib/redux/slices/diveMode/diveModeSlice";
+import { setTotalScoresArray } from "@/lib/redux/slices/totalScoresArray/totalScoresArraySlice";
 import axios from "axios";
 import {useRouter} from "next/navigation";
 
@@ -163,6 +164,15 @@ const JudgeComponent = () => {
     newTotalScore,
   ]);
 
+  useEffect(() => {
+    const tempArray = diverScoreArray.map((diver) => {
+      return diver.reduce((score, current)=>{
+          return (Number(score) + Number(current)).toFixed(2)
+      }, 0)
+  })
+    dispatch(setTotalScoresArray(tempArray))
+  }, [diverScoreArray])
+
   const handleSubmit = async () => {
     if (emailData) {
       try {
@@ -206,6 +216,7 @@ const JudgeComponent = () => {
 }
 
   const handleNextDiver = () => {
+    setUseTotal(false)
     setNewTotalScore('')
     if (diverScoreArray.length == currentDiverNumber) {
       dispatch(increaseCurrentRound());
@@ -260,7 +271,7 @@ const JudgeComponent = () => {
 
   return (
     <div className="mb-4 text-center">
-      <p>Would you prefer to just enter the total score? <input className="w-4" name="usetotalScore" type="checkbox" onChange={handleUseTotalScore}/></p>
+      <p>Would you prefer to just enter the total score? <input className="w-4" name="usetotalScore" type="checkbox" checked={useTotal} onChange={handleUseTotalScore}/></p>
       {useTotal ? (<div>
         <label htmlFor="totalScoreInput">Score: </label><input placeholder="score" className="w-20" name="totalScoreInput" onChange={handleTotalScore} value={newTotalScore}/>
         </div>)
