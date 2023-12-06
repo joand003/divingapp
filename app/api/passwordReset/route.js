@@ -35,7 +35,7 @@ export const POST = async (req, res) => {
 
     if (!email) {
         console.log("missing fields");
-        return NextResponse.json({ message: "Missing fields" }, { status: 200 });
+        return NextResponse.json({ message: "Missing fields" }, { status: 400 });
     }
 
     if (!user) await init();
@@ -51,28 +51,29 @@ export const POST = async (req, res) => {
             try {
                 await user.updateOne({ email }, { $unset: { resetPasswordToken: 1, resetPasswordExpires: 1 } }, { upsert: false });
             } catch (error) {
-                return NextResponse.json({ message: "Error connecting to server. Please try again." }, { status: 200 });
+                return NextResponse.json({ message: "Error connecting to server. Please try again." }, { status: 500 });
             }
-            return NextResponse.json({ message: "Your token is expired, please request new password change." }, { status: 200 });
+            return NextResponse.json({ message: "Your token is expired, please request new password change." }, { status: 301 });
         }
 
         if (token !== dbToken.resetPasswordToken) {
-            return NextResponse.json({ message: "Your token is invalid, please request new password change." }, { status: 200 });
+            return NextResponse.json({ message: "Your token is invalid, please request new password change." }, { status: 401 });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         
         try {
             await user.updateOne({ email }, { $set: { password: hashedPassword} }, { upsert: false });
+            return NextResponse.json({ message: "Password reset, go to login page to log in." }, { status: 200 });
         } catch (error) {
-            return NextResponse.json({ message: "Server error, please try again." }, { status: 200 });
+            return NextResponse.json({ message: "Server error, please try again." }, { status: 400 });
         }
         
-        return NextResponse.json({ message: "Password reset, go to login page to log in." }, { status: 200 });
+        
         
         
     } else {
-        return NextResponse.json({ message: "Error with the email provided." }, { status: 200 });
+        return NextResponse.json({ message: "Error with the email provided." }, { status: 401 });
     }
 }
     

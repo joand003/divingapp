@@ -73,7 +73,7 @@ export default function ResetPassword() {
                         </label>
                         <input
                             className="w-64"
-                            type="text"
+                            type="password"
                             id="password"
                             name="password"
                             value={password}
@@ -87,7 +87,7 @@ export default function ResetPassword() {
                         </label>
                         <input
                             className="w-64"
-                            type="text"
+                            type="password"
                             id="confirmPassword"
                             name="confirmPassword"
                             value={confirmPW}

@@ -17,12 +17,9 @@ import {
 import { selectCurrentDiveRound } from "../lib/redux/slices/currentDiveRound/currentDiveRoundSlice";
 import {
   selectCurrentDiverNumber,
-  increaseCurrentDiverNumber,
-  decreaseCurrentDiverNumber,
 } from "../lib/redux/slices/currentDiverNumber/currentDiverNumberSlice";
 import {
   selectDiverNameArray,
-  setDiverNameArray,
 } from "../lib/redux/slices/diverNameArray/diverNameArraySlice";
 import { selectTotalRounds } from "@/lib/redux/slices/totalRounds/totalRoundsSlice";
 import DiverNameComponent from "./DiverNameComponent";

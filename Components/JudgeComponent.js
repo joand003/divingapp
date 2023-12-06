@@ -1,5 +1,5 @@
 'use client'
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ScoreButtonComponent from "./ScoreButtonComponent";
 import { useSelector, useDispatch } from "react-redux";
 import {

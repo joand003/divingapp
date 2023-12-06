@@ -74,7 +74,7 @@ export default function Login() {
       <p>
         Not registered? <Link className="underline text-purple-500" href="/signup">Signup</Link>
       </p>
-      <p>Forgot <Link className="underline text-purple-500" href="/forgot/username">username</Link> or <Link className="underline text-purple-500" href="/forgot/password">password</Link>?</p>
+      {/* <p>Forgot <Link className="underline text-purple-500" href="/forgot/username">username</Link> or <Link className="underline text-purple-500" href="/forgot/password">password</Link>?</p> */}
     </div>
   );
 }
