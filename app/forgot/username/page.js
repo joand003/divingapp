@@ -2,16 +2,28 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const UsernameRecovery = () => {
   const [email, setEmail] = useState("");
   const [apiResponse, setApiResponse] = useState("");
+  const [processing, setProcessing] = useState(false);  
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiResponse("");
-    const response = await axios.post("/api/usernameRecovery", {email})
-    setApiResponse(response.data.message)
+    setProcessing(true);
+    try {
+      await axios.post("/api/usernameRecovery", {email})
+      setApiResponse("Email sent to recover username")
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+    } catch (err) {
+      setApiResponse(err.response.data.message)
+      setProcessing(false);
+    }
   }
 
   return (
@@ -27,12 +39,13 @@ const UsernameRecovery = () => {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={processing}
           />
         </div>
         <div className="flex flex-row justify-center">
           <p className='text-red-700'>{apiResponse}</p>
         </div>
-        <button className="" onClick={handleSubmit}>
+        <button className="" onClick={handleSubmit} disabled={processing}>
           Recover Username
         </button>
       </form>

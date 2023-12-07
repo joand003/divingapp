@@ -65,7 +65,7 @@ export const POST = async (req, res) => {
                     address: process.env.GMAIL_USER,
                 },
                 to: email,
-                subject: `Username Recovery from Diving App`,
+                subject: `Password Reset from Diving App`,
                 text: `You're receiving this message because you or someone else requested a password reset.\n
                 If you did not request this, just ignore this email.\n
                 Your password reset link is: https://diveapp-cce6b60b0629.herokuapp.com/resetPassword?token=${token}\n

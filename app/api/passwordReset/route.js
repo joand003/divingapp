@@ -29,13 +29,14 @@ async function init() {
 export const POST = async (req, res) => {
     const { email, password, token } = await req.json();
 
-    console.log(`email: ${email}`);
-    console.log(`password: ${password}`);
-    console.log(`token: ${token}`);
-
     if (!email) {
-        console.log("missing fields");
-        return NextResponse.json({ message: "Missing fields" }, { status: 400 });
+        return NextResponse.json({ message: "Missing email" }, { status: 400 });
+    }
+    if (!password) {
+        return NextResponse.json({ message: "Missing password" }, { status: 400 });
+    }
+    if (!token || token === "none") {
+        return NextResponse.json({ message: "Invalid token, request password reset again" }, { status: 400 });
     }
 
     if (!user) await init();
@@ -50,10 +51,10 @@ export const POST = async (req, res) => {
         if (now > expires.resetPasswordExpires) {
             try {
                 await user.updateOne({ email }, { $unset: { resetPasswordToken: 1, resetPasswordExpires: 1 } }, { upsert: false });
+                return NextResponse.json({ message: "Your token is expired, please request new password change." }, { status: 401 });
             } catch (error) {
                 return NextResponse.json({ message: "Error connecting to server. Please try again." }, { status: 500 });
             }
-            return NextResponse.json({ message: "Your token is expired, please request new password change." }, { status: 301 });
         }
 
         if (token !== dbToken.resetPasswordToken) {
@@ -63,7 +64,8 @@ export const POST = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         
         try {
-            await user.updateOne({ email }, { $set: { password: hashedPassword} }, { upsert: false });
+            await user.updateOne({ email }, { $set: { password: hashedPassword } }, { upsert: false });
+            await user.updateOne({ email }, { $unset: { resetPasswordToken: 1, resetPasswordExpires: 1 } }, { upsert: false });
             return NextResponse.json({ message: "Password reset, go to login page to log in." }, { status: 200 });
         } catch (error) {
             return NextResponse.json({ message: "Server error, please try again." }, { status: 400 });

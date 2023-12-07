@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import validateEmail from "@/functions/emailValidation";
+import { useRouter } from "next/navigation";
 
 export default function ResetPassword() {
     const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ export default function ResetPassword() {
     const [passwordMatchError, setPasswordMatchError] = useState("");
     const [allFieldsError, setAllFieldsError] = useState("");
     const [apiResponse, setApiResponse] = useState("");
+    const [processing, setProcessing] = useState(false);
+    const router = useRouter();
 
     const params = useSearchParams();
     const token = params.get("token");
@@ -37,14 +40,25 @@ export default function ResetPassword() {
         if (passwordMatchError || emailError || allFieldsError) {
             return;
         }
-
+        setProcessing(true);
         setApiResponse("");
-        const response = await axios.post("/api/passwordReset", {
-            email,
-            password,
-            token,
-        });
-        setApiResponse(response.data.message);
+        try {
+            await axios.post("/api/passwordReset", {
+                email,
+                password,
+                token,
+            });
+            setApiResponse("Password reset successfully");
+            setEmail("");
+            setPassword("");
+            setConfirmPW("");
+            setTimeout(() => {
+                router.push("/login");
+            }, 3000);
+        } catch (err) {
+            setProcessing(false);
+            setApiResponse(err.response.data.message);
+        }
     };
 
     return (
@@ -64,6 +78,7 @@ export default function ResetPassword() {
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            disabled={processing}
                         />
                     </div>
                     <p className="text-red-700">{emailError}</p>
@@ -78,6 +93,7 @@ export default function ResetPassword() {
                             name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            disabled={processing}
                         />
                     </div>
                     <p className="text-red-700">{passwordMatchError}</p>
@@ -92,10 +108,12 @@ export default function ResetPassword() {
                             name="confirmPassword"
                             value={confirmPW}
                             onChange={(e) => setConfirmPW(e.target.value)}
+                            disabled={processing}
                         />
                     </div>
                 </form>
-                <button className="" onClick={handleResetPW}>
+                {apiResponse && <p className="text-green-700">{apiResponse}</p>}
+                <button className="" onClick={handleResetPW} disabled={processing}>
                         Reset Password
                     </button>
             </div>
