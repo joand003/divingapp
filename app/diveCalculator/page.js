@@ -37,9 +37,9 @@ export default function DiveCalculator () {
         <div className='flex flex-row items-center justify-center text-center py-2'>
             <h3>Please select the number of judges scoring.</h3>
             <div className='flex flex-row justify-start space-x-4 ml-4'> 
-            <label><input className='radio' type='radio' name='judgeNumber' value={3} onChange={handleJudgeNumberChange}></input><span className='text-xl pl-1'>3</span></label>
-            <label><input className='radio' type='radio' name='judgeNumber' value={5} onChange={handleJudgeNumberChange}></input><span className='text-xl pl-1'>5</span></label>
-            <label><input className='radio' type='radio' name='judgeNumber' value={7} onChange={handleJudgeNumberChange}></input><span className='text-xl pl-1'>7</span></label>
+            <label><input className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-400' type='radio' name='judgeNumber' value={3} onChange={handleJudgeNumberChange}></input><span className='text-xl pl-1'>3</span></label>
+            <label><input className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-400' type='radio' name='judgeNumber' value={5} onChange={handleJudgeNumberChange}></input><span className='text-xl pl-1'>5</span></label>
+            <label><input className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-400' type='radio' name='judgeNumber' value={7} onChange={handleJudgeNumberChange}></input><span className='text-xl pl-1'>7</span></label>
             </div>
         </div>
         {diveMode === 'diveCalculator' ? <DiveSelectionComponent /> : ''}

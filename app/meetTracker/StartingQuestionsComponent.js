@@ -4,20 +4,20 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     selectNumberOfJudges,
     setNumberOfJudges,
-} from "../lib/redux/slices/numberOfJudges/numberOfJudgesSlice";
+} from "../../lib/redux/slices/numberOfJudges/numberOfJudgesSlice";
 import {
     selectTotalRounds,
     setTotalRounds,
-} from "../lib/redux/slices/totalRounds/totalRoundsSlice";
-import { setDiverNameArray } from "../lib/redux/slices/diverNameArray/diverNameArraySlice";
-import { setDiverScoresArray } from "../lib/redux/slices/diverScoresArray/diverScoresArraySlice";
-import { setDiverCodesArray } from "../lib/redux/slices/diverCodesArray/diverCodesArraySlice";
-import { setDiverDescriptionsArray } from "../lib/redux/slices/diverDescriptionsArray/diverDescriptionsArraySlice";
-import { setDiverDifficultyArray } from "../lib/redux/slices/diverDifficultyArray/diverDifficultyArraySlice";
-import { setJudgeScoresArray } from "../lib/redux/slices/judgeScoresArray/judgeScoresArraySlice";
-import judgeArrayBuilder from "../functions/judgeArrayBuilder";
-import diverArrayBuilder from "../functions/diverArrayBuilder";
-import { selectMeetInfoObject, setMeetInfoObject } from "../lib/redux/slices/meetInfoObject/meetInfoObjectSlice";
+} from "../../lib/redux/slices/totalRounds/totalRoundsSlice";
+import { setDiverNameArray } from "../../lib/redux/slices/diverNameArray/diverNameArraySlice";
+import { setDiverScoresArray } from "../../lib/redux/slices/diverScoresArray/diverScoresArraySlice";
+import { setDiverCodesArray } from "../../lib/redux/slices/diverCodesArray/diverCodesArraySlice";
+import { setDiverDescriptionsArray } from "../../lib/redux/slices/diverDescriptionsArray/diverDescriptionsArraySlice";
+import { setDiverDifficultyArray } from "../../lib/redux/slices/diverDifficultyArray/diverDifficultyArraySlice";
+import { setJudgeScoresArray } from "../../lib/redux/slices/judgeScoresArray/judgeScoresArraySlice";
+import judgeArrayBuilder from "../../functions/judgeArrayBuilder";
+import diverArrayBuilder from "../../functions/diverArrayBuilder";
+import { selectMeetInfoObject, setMeetInfoObject } from "../../lib/redux/slices/meetInfoObject/meetInfoObjectSlice";
 import {
     selectDiveMode,
     setDiveMode,
@@ -222,7 +222,7 @@ const StartingQuestionsComponent = () => {
                 <div className="flex flex-row justify-start space-x-4 ml-4">
                     <label>
                         <input
-                            className="radio"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400"
                             type="radio"
                             name="judgeNumber"
                             value={3}
@@ -232,7 +232,7 @@ const StartingQuestionsComponent = () => {
                     </label>
                     <label>
                         <input
-                            className="radio"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400"
                             type="radio"
                             name="judgeNumber"
                             value={5}
@@ -242,7 +242,7 @@ const StartingQuestionsComponent = () => {
                     </label>
                     <label>
                         <input
-                            className="radio"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400"
                             type="radio"
                             name="judgeNumber"
                             value={7}
@@ -259,7 +259,7 @@ const StartingQuestionsComponent = () => {
                 <div className="flex flex-row items-center justify-start space-x-4 ml-4">
                     <label>
                         <input
-                            className="radio"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400"
                             type="radio"
                             name="diveNumber"
                             value={6}
@@ -269,7 +269,7 @@ const StartingQuestionsComponent = () => {
                     </label>
                     <label>
                         <input
-                            className="radio"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400"
                             type="radio"
                             name="diveNumber"
                             value={11}

@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import DiveSelectionComponent from "../../Components/DiveSelectionComponent";
 import JudgeComponent from "../../Components/JudgeComponent";
-import StartingQuestionsComponent from "../../Components/StartingQuestionsComponent";
-import ResultsTableComponent from "../../Components/ResultsTableComponent";
+import StartingQuestionsComponent from "./StartingQuestionsComponent";
+import ResultsTableComponent from "./ResultsTableComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { selectDiveMode } from "@/lib/redux/slices/diveMode/diveModeSlice";
 import { setUserObject } from "@/lib/redux/slices/userObject/userObjectSlice";

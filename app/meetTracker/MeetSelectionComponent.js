@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { selectMeetInfoObject, setMeetInfoObject } from "../lib/redux/slices/meetInfoObject/meetInfoObjectSlice";
+import { selectMeetInfoObject, setMeetInfoObject } from "../../lib/redux/slices/meetInfoObject/meetInfoObjectSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { girlsMeetArray2324, boysMeetArray2324 } from "@/functions/meetArrays";
 

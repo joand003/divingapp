@@ -24,60 +24,6 @@ code {
 .main {
   margin: 0 10% 0 10%;
 }
-/* 
-h1 {
-  text-align: center;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.containerColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.containerLeft {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.padLeft {
-  padding-left: 2em;
-}
-
-td {
-  padding: 0 5px 0 5px;
-  text-align: center;
-}
-
-.smallContainer {
-  padding: 5px;
-}
-
-label {
-  padding-right: 5px;
-}
-
-input {
-  width: 30px;
-} */
-
-/* button {
-  margin: 5px;
-  background-color: darkgray;
-} */
-
-
-
 
 
 @layer base {
@@ -108,9 +54,6 @@ input {
   ol {
     @apply list-decimal pl-5;
   }
-  nav {
-    @apply bg-gray-800 text-white lg:h-12 sm:h-9 flex justify-end items-center;
-  }
   input {
     @apply border border-gray-400 rounded p-2 text-left lg:w-60 sm:w-20;
   }
@@ -119,14 +62,3 @@ input {
   }
 }
 
-@layer components {
-  .radio {
-    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-400;
-  }
-  .navLink {
-    @apply px-4 hover:bg-gray-300 lg:h-12 sm:h-9 items-center flex;
-  }
-  .logout {
-    @apply hover:bg-gray-300 lg:h-12 sm:h-9 items-center flex bg-gray-800 text-white p-4 m-0 w-auto;
-  }
-}

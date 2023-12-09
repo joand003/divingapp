@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectDiverNameArray } from '../lib/redux/slices/diverNameArray/diverNameArraySlice'
-import { selectTotalScoresArray } from '../lib/redux/slices/totalScoresArray/totalScoresArraySlice'
+import { selectDiverNameArray } from '../../lib/redux/slices/diverNameArray/diverNameArraySlice'
+import { selectTotalScoresArray } from '../../lib/redux/slices/totalScoresArray/totalScoresArraySlice'
 
 
 const ResultsTableComponent = () => {
