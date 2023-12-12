@@ -8,6 +8,7 @@ import {
 } from "../lib/redux/slices/userObject/userObjectSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import '../app/globals.css'
 
 const HeaderComponent = () => {
   const router = useRouter();
