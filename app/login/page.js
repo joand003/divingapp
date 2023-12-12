@@ -34,7 +34,7 @@ export default function Login() {
         await axios.post("/api/login", { username, password });
         router.push("/");
       } catch (err) {
-        console.log(err);
+        setPasswordError(err.response.data.error)
       }
     }
   };
@@ -63,8 +63,9 @@ export default function Login() {
             name="password"
             onChange={handlePassword}
           />
-          <p>{passwordError}</p>
+         
         </div>
+        <p className="pl-2 text-red-700 text-center pt-2">{passwordError}</p>
         <div className="flex justify-center py-3">
         <button className="bg-gray-500" type="submit" onClick={handleSubmit}>
           Login
