@@ -13,8 +13,6 @@ export default function Home() {
       <Link href='/meetTracker'><h3 className='pt-12'>Meet Tracker</h3>
       <p className='py-2'>This calculator will allow you to save the dive information for all your dives during a meet for any number of divers.</p>
       <p className='italic pb-4'>Note: You will have to sign in before you can use this as it will email and save your results to your own database.</p></Link>
-      <p>Coming Soon!</p>
-      <p>Be able to sort and analyze your dives from the database.</p>
     </div>
   )
 }
